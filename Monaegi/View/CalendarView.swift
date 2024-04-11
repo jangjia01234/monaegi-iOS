@@ -157,23 +157,23 @@ private struct CellView: View {
     
     fileprivate var body: some View {
         VStack {
+            Rectangle()
+                .cornerRadius(10)
+                .frame(width: 30, height: 30)
+                .foregroundColor(.gray)
+                // 🚨 FIX: 초록색 안나오는 문제 디버깅 필요
+                .foregroundColor(clicked ? .green : .gray)
+            
             Circle()
                 .fill(backgroundColor)
-                .overlay(Text(String(day)))
-                .foregroundColor(textColor)
-            
-            Spacer()
-            
-            if clicked {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.green)
-                    .frame(width: 10, height: 10)
-            } else {
-                Spacer()
-                    .frame(height: 10)
-            }
+                .overlay(
+                    Text(String(day))
+                        .font(.system(size: 14))
+                        .foregroundColor(textColor)
+                )
+                .frame(width: 20, height: 20)
         }
-        .frame(height: 50)
+        .frame(height: 65)
     }
 }
 
