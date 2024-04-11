@@ -56,6 +56,7 @@ struct ContentView: View {
             .foregroundColor(.green)
             .padding(.bottom, 50)
         }
+        .background(.black)
     }
 
     private func addItem() {

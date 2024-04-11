@@ -45,6 +45,7 @@ struct CalendarView: View {
         HStack(alignment: .center) {
             Text(month, formatter: Self.calendarHeaderDateFormatter)
                 .font(.title.bold())
+                .foregroundColor(.white)
             
             Spacer()
             
@@ -125,20 +126,20 @@ private struct CellView: View {
     private var isCurrentMonthDay: Bool
     private var textColor: Color {
         if clicked {
-            return Color.white
-        } else if isCurrentMonthDay {
             return Color.black
+        } else if isCurrentMonthDay {
+            return Color.white
         } else {
             return Color.gray
         }
     }
     private var backgroundColor: Color {
         if clicked {
-            return Color.black
+            return Color.white
         } else if isToday {
             return Color.gray
         } else {
-            return Color.white
+            return Color.black
         }
     }
     
@@ -165,7 +166,7 @@ private struct CellView: View {
             
             if clicked {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.red)
+                    .fill(.green)
                     .frame(width: 10, height: 10)
             } else {
                 Spacer()
