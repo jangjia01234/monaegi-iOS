@@ -10,37 +10,51 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                List {
-                    ForEach(items) { item in
-                        NavigationLink {
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                        } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
-                        }
-                    }
-                    .onDelete(perform: deleteItems)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
-                    }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
-                
-                Button(action: addItem) {
-                    Label("", systemImage: "plus.circle.fill")
-                }
-                .font(.system(size: 50))
-                .foregroundColor(.green)
-                // 🚨 FIX: 다른 레이아웃 배치 방식으로 수정 필요
-                .padding(.top, 600)
+//        NavigationView {
+//            ZStack {
+//                List {
+//                    ForEach(items) { item in
+//                        NavigationLink {
+//                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//                        } label: {
+//                            Text(item.timestamp!, formatter: itemFormatter)
+//                        }
+//                    }
+//                    .onDelete(perform: deleteItems)
+//                }
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarTrailing) {
+//                        EditButton()
+//                    }
+//                    ToolbarItem {
+//                        Button(action: addItem) {
+//                            Label("Add Item", systemImage: "plus")
+//                        }
+//                    }
+//                }
+//                
+//                Button(action: addItem) {
+//                    Label("", systemImage: "plus.circle.fill")
+//                }
+//                .font(.system(size: 50))
+//                .foregroundColor(.green)
+//                // 🚨 FIX: 다른 레이아웃 배치 방식으로 수정 필요
+//                .padding(.top, 600)
+//            }
+//        }
+        
+        VStack {
+            CalendarView()
+                .padding(.vertical, 50)
+            
+            Spacer()
+            
+            Button(action: addItem) {
+                Label("", systemImage: "plus.circle.fill")
             }
+            .font(.system(size: 60))
+            .foregroundColor(.green)
+            .padding(.bottom, 50)
         }
     }
 

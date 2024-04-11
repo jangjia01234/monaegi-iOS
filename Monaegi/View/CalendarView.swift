@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CalenderView: View {
+struct CalendarView: View {
     @State var month: Date = Date()
     @State var clickedCurrentMonthDates: Date?
     
@@ -179,6 +179,6 @@ private struct CellView: View {
 // 📱 프리뷰
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        CalenderView()
+        CalendarView()
     }
 }

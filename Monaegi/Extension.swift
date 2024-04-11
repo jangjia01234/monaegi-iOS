@@ -1,7 +1,7 @@
 import SwiftUI
 
 // 🛠️ CalendarView Static 프로퍼티
-extension CalenderView {
+extension CalendarView {
   var today: Date {
     let now = Date()
     let components = Calendar.current.dateComponents([.year, .month, .day], from: now)
@@ -18,7 +18,7 @@ extension CalenderView {
 }
 
 // 🛠️ 내부 로직 메서드
-extension CalenderView {
+extension CalendarView {
   /// 특정 해당 날짜
   func getDate(for index: Int) -> Date {
     let calendar = Calendar.current
