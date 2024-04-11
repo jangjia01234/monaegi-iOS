@@ -38,7 +38,7 @@ struct ContentView: View {
                 }
                 .font(.system(size: 50))
                 .foregroundColor(.green)
-                // FIX: 다른 레이아웃 배치 방식으로 수정 필요
+                // 🚨 FIX: 다른 레이아웃 배치 방식으로 수정 필요
                 .padding(.top, 600)
             }
         }
