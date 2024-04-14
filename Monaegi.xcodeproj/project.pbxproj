@@ -61,15 +61,12 @@
 		8DB0BFF52BC7B5B200105456 /* Monaegi */ = {
 			isa = PBXGroup;
 			children = (
-				8DB0C0102BC924E500105456 /* Component */,
-				8DB0C00E2BC7CC4400105456 /* Extension.swift */,
-				8DB0BFF62BC7B5B200105456 /* MonaegiApp.swift */,
-				8DB0BFFF2BC7B5B300105456 /* Persistence.swift */,
-				8DB0C00D2BC7CBED00105456 /* Adaptor */,
-				8DB0C00C2BC7CBE200105456 /* Model */,
-				8DB0C00B2BC7CBDE00105456 /* View */,
-				8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */,
 				8DB0C0012BC7B5B300105456 /* Monaegi.xcdatamodeld */,
+				8DB0C00C2BC7CBE200105456 /* Model */,
+				8DB0C0102BC924E500105456 /* Component */,
+				8DB0C00B2BC7CBDE00105456 /* View */,
+				8DB0BFF62BC7B5B200105456 /* MonaegiApp.swift */,
+				8DB0C00D2BC7CBED00105456 /* Adaptor */,
 				8DB0BFFC2BC7B5B300105456 /* Preview Content */,
 			);
 			path = Monaegi;
@@ -95,6 +92,9 @@
 		8DB0C00C2BC7CBE200105456 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */,
+				8DB0BFFF2BC7B5B300105456 /* Persistence.swift */,
+				8DB0C00E2BC7CC4400105456 /* Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

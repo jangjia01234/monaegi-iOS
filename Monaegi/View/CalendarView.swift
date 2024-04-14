@@ -27,13 +27,13 @@ struct CalendarView: View {
         VStack {
             yearMonthView
                 .padding(.horizontal, 10)
-                .padding(.bottom, 5)
+                .padding(.bottom, 10)
             
             HStack {
                 ForEach(Self.weekdaySymbols.indices, id: \.self) { symbol in
                     Text(Self.weekdaySymbols[symbol].uppercased())
-                        .font(.system(size: 14))
-                        .fontWeight(.semibold)
+                        .font(.system(size: 12))
+                        .fontWeight(.bold)
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity)
                 }
@@ -133,7 +133,7 @@ private struct CellView: View {
         } else if isToday {
             return Color.black
         } else if isCurrentMonthDay {
-            return Color.white
+            return Color.gray
         } else {
             return Color.clear
         }
@@ -173,20 +173,21 @@ private struct CellView: View {
     fileprivate var body: some View {
         VStack {
             Rectangle()
-                .cornerRadius(10)
+                .cornerRadius(8)
                 .frame(width: 30, height: 30)
                 .foregroundColor(rectBgColor)
+                .padding(.bottom, -5)
             
             Circle()
                 .fill(backgroundColor)
                 .overlay(
                     Text(String(day))
-                        .font(.system(size: 14))
+                        .font(.system(size: 10))
                         .foregroundColor(textColor)
                 )
                 .frame(width: 20, height: 20)
         }
-        .frame(height: 65)
+        .frame(height: 55)
     }
 }
 
