@@ -18,6 +18,8 @@ struct CalendarView: View {
             calendarGridView
         }
         .padding(.horizontal, 20)
+        // ❌ FIX: 테스트용 코드. 추후 삭제 예정
+        .background(.black)
     }
     
     // 🎨 헤더 뷰
@@ -124,13 +126,16 @@ private struct CellView: View {
     private var clicked: Bool
     private var isToday: Bool
     private var isCurrentMonthDay: Bool
+    
     private var textColor: Color {
         if clicked {
+            return Color.black
+        } else if isToday {
             return Color.black
         } else if isCurrentMonthDay {
             return Color.white
         } else {
-            return Color.gray
+            return Color.clear
         }
     }
     private var backgroundColor: Color {
@@ -140,6 +145,16 @@ private struct CellView: View {
             return Color.gray
         } else {
             return Color.black
+        }
+    }
+    
+    private var rectBgColor: Color {
+        if clicked {
+            return Color("AccentColor")
+        } else if isCurrentMonthDay {
+            return Color.gray
+        } else {
+            return Color.clear
         }
     }
     
@@ -160,9 +175,7 @@ private struct CellView: View {
             Rectangle()
                 .cornerRadius(10)
                 .frame(width: 30, height: 30)
-                .foregroundColor(.gray)
-                // 🚨 FIX: 초록색 안나오는 문제 디버깅 필요
-                .foregroundColor(clicked ? .green : .gray)
+                .foregroundColor(rectBgColor)
             
             Circle()
                 .fill(backgroundColor)
