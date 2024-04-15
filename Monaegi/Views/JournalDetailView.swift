@@ -14,6 +14,7 @@ struct JournalDetailView: View {
             TextEditor(text: $journal.content)
                 .font(.subheadline)
         }
+        .foregroundColor(.white)
         .padding()
     }
 }

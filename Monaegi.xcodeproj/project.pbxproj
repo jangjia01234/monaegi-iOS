@@ -48,20 +48,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D6F24CE2BCD4C00005C0A3E /* ViewModel */ = {
+		8D6F24CE2BCD4C00005C0A3E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				8DB0BFFF2BC7B5B300105456 /* Persistence.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		8D6F24CF2BCD4C15005C0A3E /* Helper */ = {
+		8D6F24CF2BCD4C15005C0A3E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				8DB0C00E2BC7CC4400105456 /* Extension.swift */,
 			);
-			path = Helper;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		8DB0BFEA2BC7B5B200105456 = {
@@ -86,11 +86,11 @@
 				8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */,
 				8DB0C0012BC7B5B300105456 /* Monaegi.xcdatamodeld */,
 				8DB0BFF62BC7B5B200105456 /* MonaegiApp.swift */,
-				8D6F24CF2BCD4C15005C0A3E /* Helper */,
-				8D6F24CE2BCD4C00005C0A3E /* ViewModel */,
-				8DB0C00C2BC7CBE200105456 /* Model */,
-				8DB0C0102BC924E500105456 /* Component */,
-				8DB0C00B2BC7CBDE00105456 /* View */,
+				8D6F24CF2BCD4C15005C0A3E /* Helpers */,
+				8D6F24CE2BCD4C00005C0A3E /* ViewModels */,
+				8DB0C00C2BC7CBE200105456 /* Models */,
+				8DB0C0102BC924E500105456 /* Components */,
+				8DB0C00B2BC7CBDE00105456 /* Views */,
 				8DB0BFFC2BC7B5B300105456 /* Preview Content */,
 			);
 			path = Monaegi;
@@ -104,7 +104,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8DB0C00B2BC7CBDE00105456 /* View */ = {
+		8DB0C00B2BC7CBDE00105456 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				8DB0BFF82BC7B5B200105456 /* ContentView.swift */,
@@ -112,23 +112,23 @@
 				8D6F24D22BCD6279005C0A3E /* JournalDetailView.swift */,
 				8D6F24D42BCD62C1005C0A3E /* JournalListView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		8DB0C00C2BC7CBE200105456 /* Model */ = {
+		8DB0C00C2BC7CBE200105456 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				8D6F24D02BCD5AC7005C0A3E /* Journal.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		8DB0C0102BC924E500105456 /* Component */ = {
+		8DB0C0102BC924E500105456 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				8DB0C0112BC9251400105456 /* JournalView.swift */,
 			);
-			path = Component;
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
