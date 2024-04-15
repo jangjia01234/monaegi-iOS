@@ -15,9 +15,17 @@ struct CalendarView: View {
     var body: some View {
         VStack {
             headerView
-            calendarGridView
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color("darkGray"))
+                    .padding(.horizontal, 20)
+                
+                calendarGridView
+                    .padding(.horizontal, 90)
+                    .padding(.vertical, 20)
+            }
         }
-        .padding(.horizontal, 20)
         // ❌ FIX: 테스트용 코드. 추후 삭제 예정
         .background(.black)
     }
@@ -26,8 +34,8 @@ struct CalendarView: View {
     private var headerView: some View {
         VStack {
             yearMonthView
-                .padding(.horizontal, 10)
-                .padding(.bottom, 10)
+                .padding(.top, 80)
+                .padding(.bottom, 20)
             
             HStack {
                 ForEach(Self.weekdaySymbols.indices, id: \.self) { symbol in
@@ -39,7 +47,9 @@ struct CalendarView: View {
                 }
             }
             .padding(.bottom, 5)
+            .padding(.horizontal, 10)
         }
+        .padding(.horizontal, 20)
     }
     
     // 🎨 연월 표시
@@ -147,12 +157,11 @@ private struct CellView: View {
             return Color.black
         }
     }
-    
     private var rectBgColor: Color {
         if clicked {
             return Color("AccentColor")
         } else if isCurrentMonthDay {
-            return Color.gray
+            return Color("darkGray")
         } else {
             return Color.clear
         }
@@ -173,25 +182,25 @@ private struct CellView: View {
     fileprivate var body: some View {
         VStack {
             Rectangle()
-                .cornerRadius(8)
-                .frame(width: 30, height: 30)
+                .cornerRadius(5)
+                .frame(width: 25, height: 25)
                 .foregroundColor(rectBgColor)
                 .padding(.bottom, -5)
             
-            Circle()
-                .fill(backgroundColor)
-                .overlay(
-                    Text(String(day))
-                        .font(.system(size: 10))
-                        .foregroundColor(textColor)
-                )
-                .frame(width: 20, height: 20)
+//            Circle()
+//                .fill(backgroundColor)
+//                .overlay(
+//                    Text(String(day))
+//                        .font(.system(size: 10))
+//                        .foregroundColor(textColor)
+//                )
+//                .frame(width: 20, height: 20)
         }
-        .frame(height: 55)
+//        .frame(height: 55)
+        .frame(height: 20)
     }
 }
 
-// 📱 프리뷰
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()

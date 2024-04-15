@@ -21,30 +21,30 @@ struct JournalView: View {
 //        }
 //    }
     
-    @Binding var memos: [Memo]
-    @State var memo: Memo = Memo(title: "", content: "")
+    @Binding var journals: [Journal]
+    @State var journal: Journal = Journal(title: "", content: "")
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
-            TextField("제목", text: $memo.title)
+            TextField("제목", text: $journal.title)
                 .font(.headline)
                 .padding(.vertical, 8)
             Divider()
-            TextEditor(text: $memo.content)
+            TextEditor(text: $journal.content)
                 .font(.subheadline)
         }
         .padding()
         .navigationBarItems(trailing:
                                 Button("완료") {
-            memos.append(memo)
+            journals.append(journal)
             presentationMode.wrappedValue.dismiss()
         }
-            .disabled(memo.title.isEmpty || memo.content.isEmpty)
+            .disabled(journal.title.isEmpty || journal.content.isEmpty)
         )
     }
 }
 
 #Preview {
-    JournalView(memos: .constant([]))
+    JournalView(journals: .constant([]))
 }
