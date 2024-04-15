@@ -1,14 +1,12 @@
 import SwiftUI
 
 struct JournalListView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var journalData : JournalState
     
     @State private var isShowingSheet = false
     
     let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
-    
-    @Environment(\.presentationMode) var presentationMode
-    
-    @EnvironmentObject var journalData : JournalState
     
     var body: some View {
         NavigationView {

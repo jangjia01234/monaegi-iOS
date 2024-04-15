@@ -21,7 +21,6 @@ struct JournalView: View {
 //        }
 //    }
     
-    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var journalData : JournalState
     

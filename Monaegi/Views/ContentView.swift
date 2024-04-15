@@ -3,20 +3,15 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
+    @EnvironmentObject var journalData : JournalState
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     
     private var items: FetchedResults<Item>
+    let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
     
     @State private var isShowingSheet = false
-    
-    @EnvironmentObject var journalData : JournalState
-//    @State var journalDataList: [JournalData] = JournalState.journals
-//    @State var journalData: JournalData = JournalState.journal
-    
-    let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
     
     var body: some View {
         ZStack {
