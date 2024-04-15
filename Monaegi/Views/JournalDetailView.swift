@@ -1,20 +1,18 @@
 import SwiftUI
 
 struct JournalDetailView: View {
-    @Binding var journals: [Journal]
-    @State var journal: Journal = Journal(title: "", content: "")
+    @EnvironmentObject var journalData : JournalState
     
     var body: some View {
         VStack {
-            TextEditor(text: $journal.title)
-                .frame(height: 50)
+            TextEditor(text: $journalData.journal.title)
+                .frame(height: 40)
             
             Divider()
             
-            TextEditor(text: $journal.content)
+            TextEditor(text: $journalData.journal.content)
                 .font(.subheadline)
         }
-        .foregroundColor(.white)
         .padding()
     }
 }

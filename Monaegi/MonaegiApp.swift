@@ -1,10 +1,3 @@
-//
-//  MonaegiApp.swift
-//  Monaegi
-//
-//  Created by Jia Jang on 4/11/24.
-//
-
 import SwiftUI
 
 @main
@@ -15,6 +8,7 @@ struct MonaegiApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(JournalState())
         }
     }
 }

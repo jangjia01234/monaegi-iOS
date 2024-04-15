@@ -1,24 +1,25 @@
 import SwiftUI
 
 struct JournalListView: View {
-    @State var journals: [Journal] = []
-    @State var journal: Journal = Journal(title: "", content: "")
+    
     @State private var isShowingSheet = false
     
     let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
     
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var journalData : JournalState
+    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(journals) { journal in
-                        NavigationLink(destination: JournalDetailView(journals: $journals)) {
+                    ForEach(journalData.journals) { journal in
+                        NavigationLink(destination: JournalDetailView()) {
                             VStack(alignment: .leading) {
-                                Text(journal.title)
+                                Text(journalData.journal.title)
                                     .font(.headline)
-                                Text(journal.content)
+                                Text(journalData.journal.content)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
@@ -39,7 +40,7 @@ struct JournalListView: View {
                 .sheet(isPresented: $isShowingSheet,
                        onDismiss: didDismiss) {
                     NavigationStack {
-                        JournalView(journals: $journals)
+                        JournalView()
                             .navigationTitle(todayDate)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar(content: {

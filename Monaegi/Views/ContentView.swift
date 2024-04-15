@@ -11,7 +11,10 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     @State private var isShowingSheet = false
-    @State var journals: [Journal] = []
+    
+    @EnvironmentObject var journalData : JournalState
+//    @State var journalDataList: [JournalData] = JournalState.journals
+//    @State var journalData: JournalData = JournalState.journal
     
     let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
     

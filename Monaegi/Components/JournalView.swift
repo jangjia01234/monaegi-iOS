@@ -21,30 +21,26 @@ struct JournalView: View {
 //        }
 //    }
     
-    @Binding var journals: [Journal]
-    @State var journal: Journal = Journal(title: "", content: "")
+    
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var journalData : JournalState
     
     var body: some View {
         VStack {
-            TextField("제목", text: $journal.title)
+            TextField("제목", text: $journalData.journal.title)
                 .font(.headline)
                 .padding(.vertical, 8)
             Divider()
-            TextEditor(text: $journal.content)
+            TextEditor(text: $journalData.journal.content)
                 .font(.subheadline)
         }
         .padding()
         .navigationBarItems(trailing:
                                 Button("완료") {
-            journals.append(journal)
+            journalData.journals.append(journalData.journal)
             presentationMode.wrappedValue.dismiss()
         }
-            .disabled(journal.title.isEmpty || journal.content.isEmpty)
+            .disabled(journalData.journal.title.isEmpty || journalData.journal.content.isEmpty)
         )
     }
-}
-
-#Preview {
-    JournalView(journals: .constant([]))
 }
