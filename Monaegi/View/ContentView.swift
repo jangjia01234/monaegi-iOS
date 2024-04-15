@@ -13,36 +13,48 @@ struct MemoListView: View {
     
     let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
     
-    // 🎨 NavigationBarTitle 색상 변경을 위한 초기화 코드
-    init() {
-        // NavigationBarTitle이 큰 글씨일 때 원하는 색상으로 설정
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-        
-        // NavigationBarTitle이 .inline일 때 원하는 색상으로 설정
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
                 List {
                     ForEach(memos) { memo in
-                        NavigationLink(destination: MemoDetailView(memo: memo)) {
-                            VStack(alignment: .leading) {
-                                Text(memo.title)
-                                    .font(.headline)
-                                Text(memo.content)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
+                        VStack(alignment: .leading) {
+                            Text(memo.title)
+                                .font(.headline)
+                            Text(memo.content)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
                         }
+//                        .listRowBackground(Color.gray)
+                        
+                        .sheet(isPresented: $isShowingSheet,
+                               onDismiss: didDismiss) {
+                            MemoDetailView(memo: memo)
+                                .presentationDetents([.large])
+                        }
+                        
+//                        NavigationLink(destination: MemoDetailView(memo: memo)) {
+//                            VStack(alignment: .leading) {
+//                                Text(memo.title)
+//                                    .font(.headline)
+//                                Text(memo.content)
+//                                    .font(.subheadline)
+//                                    .foregroundColor(.gray)
+//                            }
+//                        }
                     }
                 }
-                .navigationBarTitle("리스트", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("일기 리스트")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                }
                 
                 Button(action: {
                     isShowingSheet.toggle()
-                    //  addItem()
                 }) {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -71,6 +83,8 @@ struct MemoListView: View {
                     .presentationDetents([.large])
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(.black)
         }
     }
 }
@@ -82,8 +96,6 @@ struct MemoDetailView: View {
         VStack {
             TextEditor(text: $memo.title)
                 .frame(height: 50)
-//                .font(.headline)
-//                .padding(.vertical, 8)
             
             Divider()
             
