@@ -26,8 +26,6 @@ struct CalendarView: View {
                     .padding(.vertical, 20)
             }
         }
-        // ❌ FIX: 테스트용 코드. 추후 삭제 예정
-        .background(.black)
     }
     
     // 🎨 헤더 뷰
@@ -132,6 +130,8 @@ struct CalendarView: View {
 
 // 🎨 일자 셀 뷰
 private struct CellView: View {
+    @EnvironmentObject var journalState : JournalState
+    
     private var day: Int
     private var clicked: Bool
     private var isToday: Bool
@@ -148,6 +148,7 @@ private struct CellView: View {
             return Color.clear
         }
     }
+    
     private var backgroundColor: Color {
         if clicked {
             return Color.white
@@ -157,10 +158,16 @@ private struct CellView: View {
             return Color.black
         }
     }
+    
     private var rectBgColor: Color {
-        if clicked {
-            return Color("AccentColor")
-        } else if isCurrentMonthDay {
+        if let first = journalState.journals.first {
+            if Int(journalState.journals.first!.date.suffix(2)) == day {
+                print("journals.first \n", journalState.journals.first!.date.suffix(2))
+                return Color("AccentColor")
+            }
+        }
+        
+        if isCurrentMonthDay {
             return Color("darkGray")
         } else {
             return Color.clear
@@ -196,7 +203,6 @@ private struct CellView: View {
 //                )
 //                .frame(width: 20, height: 20)
         }
-//        .frame(height: 55)
         .frame(height: 20)
     }
 }
@@ -204,5 +210,7 @@ private struct CellView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(JournalState())
     }
 }

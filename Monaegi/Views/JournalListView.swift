@@ -2,22 +2,26 @@ import SwiftUI
 
 struct JournalListView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var journalData : JournalState
+    @EnvironmentObject var journalState : JournalState
     
     @State private var isShowingSheet = false
     
-    let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
+    let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
     
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    ForEach(journalData.journals) { journal in
-                        NavigationLink(destination: JournalDetailView()) {
+                    ForEach(journalState.journals) { journal in
+                        NavigationLink(destination: JournalDetailView(journal: journal)) {
                             VStack(alignment: .leading) {
-                                Text(journalData.journal.title)
-                                    .font(.headline)
-                                Text(journalData.journal.content)
+                                VStack(alignment: .leading) {
+                                    Text(journal.date)
+                                    Text(journal.title)
+                                }
+                                .font(.headline)
+                                
+                                Text(journal.content)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
@@ -59,4 +63,10 @@ struct JournalListView: View {
             .background(.black)
         }
     }
+}
+
+#Preview {
+    JournalListView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        .environmentObject(JournalState())
 }

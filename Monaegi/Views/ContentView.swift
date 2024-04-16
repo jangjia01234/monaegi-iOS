@@ -3,13 +3,13 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var journalData : JournalState
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     
     private var items: FetchedResults<Item>
-    let todayDate : Text = Text(Date.now, format: .dateTime.year().day().month())
+    
+    @EnvironmentObject var journalState : JournalState
     
     @State private var isShowingSheet = false
     
@@ -67,5 +67,7 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        .environmentObject(JournalState())
 }
