@@ -56,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				8DB0BFFF2BC7B5B300105456 /* Persistence.swift */,
-				8D6F24DA2BCD84FB005C0A3E /* JournalState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -124,6 +123,7 @@
 		8DB0C00C2BC7CBE200105456 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D6F24DA2BCD84FB005C0A3E /* JournalState.swift */,
 				8D6F24D82BCD7FA6005C0A3E /* JournalData.swift */,
 			);
 			path = Models;

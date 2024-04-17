@@ -164,19 +164,10 @@ private struct CellView: View {
     }
     
     private var rectBgColor: Color {
-        // 🚨 FIX: 연, 월, 일이 같은 경우에만 변경 필요 (현재 같은 일에 해당하면 모두 바뀜)
-        
-        // 2024-04-16
-        
         if journalState.journals.count > 0 {
             if Int(journalState.journals.first!.date.suffix(2)) == day &&
                 Int(journalState.journals.first!.date.split(separator: "-")[1]) == month
             {
-                print("journalState.journals \n", journalState.journals)
-                
-                print("test \n", journalState.journals.first!.date.split(separator: "-"))
-
-                print("journals.first \n", journalState.journals.first!.date.suffix(2))
                 return Color("AccentColor")
             }
         }

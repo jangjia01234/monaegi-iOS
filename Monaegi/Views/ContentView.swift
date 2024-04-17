@@ -21,6 +21,7 @@ struct ContentView: View {
                 Spacer() 
                 
                 JournalListView()
+                    .environmentObject(journalState)
             }
         }
         .background(.black)

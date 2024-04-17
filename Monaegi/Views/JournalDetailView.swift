@@ -25,8 +25,15 @@ struct JournalDetailView: View {
                     Spacer()
                     
                     Button(action: {
+                        if isEditing {
+                            journalState.updateJournal(id: journal.id, after: JournalData(title: title, content: content, date: ""))
+                            
+                        } else {
+                            print("button is working in non-editing environment")
+                        }
+                        
                         isEditing.toggle()
-                        save()
+                        
                     }, label: {
                         Text(isEditing ? "완료" : "수정")
                             .fontWeight(.semibold)
@@ -35,9 +42,9 @@ struct JournalDetailView: View {
                 }
                 
                 if isEditing == true {
-                    TextField("", text: $title)
+                    TextEditor(text: $title)
                     Divider()
-                    TextField("", text: $content)
+                    TextEditor(text: $content)
                 } else {
                     Text(journal.title)
                     Divider()
@@ -48,9 +55,6 @@ struct JournalDetailView: View {
         }
         .onTapGesture { hideKeyboardAndSave() }
         .animation(nil, value: editMode?.wrappedValue)
-//        .toolbar {
-//            EditButton()
-//        }
         .padding()
     }
     
@@ -60,7 +64,15 @@ struct JournalDetailView: View {
     }
     
     private func save() {
-        JournalData(title: title, content: content, date: "")
+        
+        
+        
+//        self.journalState.addData()
+//        let today = "\(Date.now)".split(separator: " ")[0]
+//        
+//        let journalData = JournalData(title: title, content: content, date: String(today))
+//        
+//        journalState.journals.append(journalData)
     }
 }
 

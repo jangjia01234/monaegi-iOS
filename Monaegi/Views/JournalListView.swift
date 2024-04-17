@@ -10,10 +10,10 @@ struct JournalListView: View {
     let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 List {
-                    ForEach(journalState.journals) { journal in
+                    ForEach(Array(journalState.journals.enumerated()), id: \.1) { idx, journal in
                         Button(action: {
                             isShowingViewSheet = true
                         }, label: {
@@ -29,24 +29,27 @@ struct JournalListView: View {
                                 Text(journal.content)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
+                                
+                                
                             }
                         })
                         .sheet(isPresented: $isShowingViewSheet, onDismiss: didDismiss) {
-                            NavigationStack {
-                                JournalDetailView(journal: journal)
-                                    .navigationTitle(todayDate)
-                                    .navigationBarTitleDisplayMode(.inline)
-                                    .toolbar {
-                                        ToolbarItem(placement: .topBarLeading) {
-                                            Button {
-                                                isShowingViewSheet.toggle()
-                                            } label: {
-                                                Text("취소")
-                                                    .fontWeight(.semibold)
-                                            }
+                        
+                            JournalDetailView(journal: journal)
+                                .environmentObject(journalState)
+                                .navigationTitle(todayDate)
+                                .navigationBarTitleDisplayMode(.inline)
+                                .toolbar {
+                                    ToolbarItem(placement: .topBarLeading) {
+                                        Button {
+                                            isShowingViewSheet.toggle()
+                                        } label: {
+                                            Text("취소")
+                                                .fontWeight(.semibold)
                                         }
                                     }
-                            }
+                                }
+                            
                         }
                     }
                     .onDelete(perform: { indexSet in
