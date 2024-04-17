@@ -19,13 +19,17 @@ struct JournalListView: View {
                         }, label: {
                             VStack(alignment: .leading) {
                                 Text(journal.date)
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom, 4)
+                                
                                 Text(journal.title)
+                                    .font(.headline)
+                                
+                                Text(journal.content)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
                             }
-                            .font(.headline)
-                            
-                            Text(journal.content)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
                         })
                         .sheet(isPresented: $isShowingViewSheet, onDismiss: didDismiss) {
                             NavigationStack {
