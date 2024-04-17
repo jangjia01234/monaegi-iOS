@@ -11,6 +11,7 @@
 		8D6F24D52BCD62C1005C0A3E /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F24D42BCD62C1005C0A3E /* JournalListView.swift */; };
 		8D6F24D92BCD7FA6005C0A3E /* JournalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F24D82BCD7FA6005C0A3E /* JournalData.swift */; };
 		8D6F24DB2BCD84FB005C0A3E /* JournalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F24DA2BCD84FB005C0A3E /* JournalState.swift */; };
+		8D6F24DF2BCFBD44005C0A3E /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6F24DE2BCFBD44005C0A3E /* Save.swift */; };
 		8DB0BFF72BC7B5B200105456 /* MonaegiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0BFF62BC7B5B200105456 /* MonaegiApp.swift */; };
 		8DB0BFF92BC7B5B200105456 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0BFF82BC7B5B200105456 /* ContentView.swift */; };
 		8DB0BFFB2BC7B5B300105456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		8D6F24D42BCD62C1005C0A3E /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
 		8D6F24D82BCD7FA6005C0A3E /* JournalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalData.swift; sourceTree = "<group>"; };
 		8D6F24DA2BCD84FB005C0A3E /* JournalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalState.swift; sourceTree = "<group>"; };
+		8D6F24DE2BCFBD44005C0A3E /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
 		8DB0BFF32BC7B5B200105456 /* Monaegi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monaegi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB0BFF62BC7B5B200105456 /* MonaegiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonaegiApp.swift; sourceTree = "<group>"; };
 		8DB0BFF82BC7B5B200105456 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				8DB0C0092BC7CBD900105456 /* CalendarView.swift */,
 				8D6F24D22BCD6279005C0A3E /* JournalDetailView.swift */,
 				8D6F24D42BCD62C1005C0A3E /* JournalListView.swift */,
+				8D6F24DE2BCFBD44005C0A3E /* Save.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D6F24DF2BCFBD44005C0A3E /* Save.swift in Sources */,
 				8DB0C00A2BC7CBD900105456 /* CalendarView.swift in Sources */,
 				8DB0C0032BC7B5B300105456 /* Monaegi.xcdatamodeld in Sources */,
 				8DB0C0002BC7B5B300105456 /* Persistence.swift in Sources */,

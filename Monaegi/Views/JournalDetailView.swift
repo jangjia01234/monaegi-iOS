@@ -2,13 +2,16 @@ import SwiftUI
 
 struct JournalDetailView: View {
     @Environment(\.editMode) private var editMode
-    
+    @EnvironmentObject var journalState : JournalState
+
     var journal: JournalData
     
     @State private var title = ""
     @State private var content = ""
     
     @State private var savedTitle: String = ""
+    
+    @State private var isEditing: Bool = false
     
     var body: some View {
         VStack {
@@ -17,10 +20,24 @@ struct JournalDetailView: View {
                     .foregroundColor(.gray)
                     .padding(.bottom, 10)
                 
-                if editMode?.wrappedValue.isEditing == true {
-                    TextField("", text: .constant(self.journal.title))
+                
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        isEditing.toggle()
+                        save()
+                    }, label: {
+                        Text(isEditing ? "완료" : "수정")
+                            .fontWeight(.semibold)
+                    })
+                    .padding(.bottom, 10)
+                }
+                
+                if isEditing == true {
+                    TextField("", text: $title)
                     Divider()
-                    TextField("", text: .constant(self.journal.content))
+                    TextField("", text: $content)
                 } else {
                     Text(journal.title)
                     Divider()
@@ -31,9 +48,9 @@ struct JournalDetailView: View {
         }
         .onTapGesture { hideKeyboardAndSave() }
         .animation(nil, value: editMode?.wrappedValue)
-        .toolbar {
-            EditButton()
-        }
+//        .toolbar {
+//            EditButton()
+//        }
         .padding()
     }
     
@@ -43,7 +60,7 @@ struct JournalDetailView: View {
     }
     
     private func save() {
-        savedTitle = title
+        JournalData(title: title, content: content, date: "")
     }
 }
 

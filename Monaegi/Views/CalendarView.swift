@@ -103,18 +103,20 @@ struct CalendarView: View {
                     if index > -1 && index < daysInMonth {
                         let date = getDate(for: index)
                         let day = Calendar.current.component(.day, from: date)
+                        let month = Calendar.current.component(.month, from: date)
                         let clicked = clickedCurrentMonthDates == date
                         let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
                         
-                        CellView(day: day, clicked: clicked, isToday: isToday)
+                        CellView(day: day, month: month, clicked: clicked, isToday: isToday)
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
                         to: previousMonth()
                     ) {
                         let day = Calendar.current.component(.day, from: prevMonthDate)
+                        let month = Calendar.current.component(.month, from: prevMonthDate)
                         
-                        CellView(day: day, isCurrentMonthDay: false)
+                        CellView(day: day, month: month, isCurrentMonthDay: false)
                     }
                 }
                 .onTapGesture {
@@ -133,6 +135,8 @@ private struct CellView: View {
     @EnvironmentObject var journalState : JournalState
     
     private var day: Int
+    private var month: Int
+    
     private var clicked: Bool
     private var isToday: Bool
     private var isCurrentMonthDay: Bool
@@ -161,11 +165,17 @@ private struct CellView: View {
     
     private var rectBgColor: Color {
         // 🚨 FIX: 연, 월, 일이 같은 경우에만 변경 필요 (현재 같은 일에 해당하면 모두 바뀜)
+        
+        // 2024-04-16
+        
         if journalState.journals.count > 0 {
             if Int(journalState.journals.first!.date.suffix(2)) == day &&
-                Int(journalState.journals.first!.date.suffix(2)) == day {
+                Int(journalState.journals.first!.date.split(separator: "-")[1]) == month
+            {
                 print("journalState.journals \n", journalState.journals)
-//                print("journalState.journals[day] \n", journalState.journals[day])
+                
+                print("test \n", journalState.journals.first!.date.split(separator: "-"))
+
                 print("journals.first \n", journalState.journals.first!.date.suffix(2))
                 return Color("AccentColor")
             }
@@ -180,11 +190,13 @@ private struct CellView: View {
     
     fileprivate init(
         day: Int,
+        month: Int,
         clicked: Bool = false,
         isToday: Bool = false,
         isCurrentMonthDay: Bool = true
     ) {
         self.day = day
+        self.month = month
         self.clicked = clicked
         self.isToday = isToday
         self.isCurrentMonthDay = isCurrentMonthDay
