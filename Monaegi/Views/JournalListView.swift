@@ -4,7 +4,8 @@ struct JournalListView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var journalState : JournalState
     
-    @State private var isShowingSheet = false
+    @State private var isShowingAddSheet = false
+    @State private var isShowingViewSheet = false
     
     let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
     
@@ -13,20 +14,38 @@ struct JournalListView: View {
             VStack {
                 List {
                     ForEach(journalState.journals) { journal in
-                        NavigationLink(destination: JournalDetailView(journal: journal)) {
+                        Button(action: {
+                            isShowingViewSheet = true
+                        }, label: {
                             VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    Text(journal.date)
-                                    Text(journal.title)
-                                }
-                                .font(.headline)
-                                
-                                Text(journal.content)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                                Text(journal.date)
+                                Text(journal.title)
+                            }
+                            .font(.headline)
+                            
+                            Text(journal.content)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        })
+                        .sheet(isPresented: $isShowingViewSheet, onDismiss: didDismiss) {
+                            NavigationStack {
+                                JournalDetailView(journal: journal)
+                                    .navigationTitle(todayDate)
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarLeading) {
+                                            Button {
+                                                isShowingViewSheet.toggle()
+                                            } label: {
+                                                Text("취소")
+                                                    .fontWeight(.semibold)
+                                            }
+                                        }
+                                    }
                             }
                         }
-                    }.onDelete(perform: { indexSet in
+                    }
+                    .onDelete(perform: { indexSet in
                         journalState.journals.remove(atOffsets: indexSet)
                     })
                 }
@@ -34,7 +53,7 @@ struct JournalListView: View {
                 Spacer()
                 
                 Button(action: {
-                    isShowingSheet.toggle()
+                    isShowingAddSheet.toggle()
                 }) {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
@@ -43,7 +62,7 @@ struct JournalListView: View {
                         .foregroundColor(Color("AccentColor"))
                         .padding(.bottom, 20)
                 }
-                .sheet(isPresented: $isShowingSheet,
+                .sheet(isPresented: $isShowingAddSheet,
                        onDismiss: didDismiss) {
                     NavigationStack {
                         JournalView()
@@ -52,7 +71,7 @@ struct JournalListView: View {
                             .toolbar(content: {
                                 ToolbarItemGroup(placement: .topBarLeading) {
                                     Button {
-                                        isShowingSheet.toggle()
+                                        isShowingAddSheet.toggle()
                                     } label: {
                                         Text("취소")
                                             .fontWeight(.semibold)

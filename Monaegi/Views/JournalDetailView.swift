@@ -1,13 +1,14 @@
 import SwiftUI
 
 struct JournalDetailView: View {
+    @Environment(\.editMode) private var editMode
+    
     var journal: JournalData
     
     @State private var title = ""
     @State private var content = ""
     
-    @Environment(\.editMode) private var editMode
-    //    @State private var disableTextEditor = true
+    @State private var savedTitle: String = ""
     
     var body: some View {
         VStack {
@@ -25,34 +26,29 @@ struct JournalDetailView: View {
                     Divider()
                     Text(journal.content)
                 }
-                
-                //                TextEditor(text: .constant(self.journal.title))
-                //                    .frame(height: 40)
-                //                    .disabled(disableTextEditor)
-                //                    .onChange(of: editMode?.wrappedValue) { _, newValue in
-                //                        if (newValue != nil) && (newValue!.isEditing) {
-                //                            disableTextEditor = false
-                //                        } else {
-                //                            disableTextEditor = true
-                //                        }
-                //                    }
-                //
-                //                Divider()
-                //
-                //                TextEditor(text: .constant(self.journal.content))
-                //                    .font(.title3)
             }
             Spacer()
         }
+        .onTapGesture { hideKeyboardAndSave() }
         .animation(nil, value: editMode?.wrappedValue)
         .toolbar {
             EditButton()
         }
         .padding()
     }
+    
+    private func hideKeyboardAndSave() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        save()
+    }
+    
+    private func save() {
+        savedTitle = title
+    }
 }
 
 
 #Preview {
     JournalDetailView(journal: (JournalData(title: "", content: "", date: "")))
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
