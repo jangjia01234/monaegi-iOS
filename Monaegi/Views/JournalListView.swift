@@ -26,8 +26,12 @@ struct JournalListView: View {
                                     .foregroundColor(.gray)
                             }
                         }
-                    }
+                    }.onDelete(perform: { indexSet in
+                        journalState.journals.remove(atOffsets: indexSet)
+                    })
                 }
+                
+                Spacer()
                 
                 Button(action: {
                     isShowingSheet.toggle()

@@ -160,13 +160,17 @@ private struct CellView: View {
     }
     
     private var rectBgColor: Color {
-        if let first = journalState.journals.first {
-            if Int(journalState.journals.first!.date.suffix(2)) == day {
+        // 🚨 FIX: 연, 월, 일이 같은 경우에만 변경 필요 (현재 같은 일에 해당하면 모두 바뀜)
+        if journalState.journals.count > 0 {
+            if Int(journalState.journals.first!.date.suffix(2)) == day &&
+                Int(journalState.journals.first!.date.suffix(2)) == day {
+                print("journalState.journals \n", journalState.journals)
+//                print("journalState.journals[day] \n", journalState.journals[day])
                 print("journals.first \n", journalState.journals.first!.date.suffix(2))
                 return Color("AccentColor")
             }
         }
-        
+    
         if isCurrentMonthDay {
             return Color("darkGray")
         } else {

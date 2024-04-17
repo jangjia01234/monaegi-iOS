@@ -19,6 +19,21 @@ struct JournalView: View {
             
             TextEditor(text: $content)
                 .font(.subheadline)
+                .overlay {
+                    VStack {
+                        HStack {
+                            Text(content.isEmpty ? "글을 작성해보세요." : "")
+                                .allowsHitTesting(false)
+                                .foregroundColor(.gray)
+                                .padding(.leading, 5)
+                                .padding(.top, 6)
+                            
+                            Spacer()
+                        }
+                        
+                        Spacer()
+                    }
+                }
         }
         .padding()
         .navigationBarItems(trailing:

@@ -18,7 +18,7 @@ struct ContentView: View {
             VStack {
                 CalendarView()
                 
-                Spacer()
+                Spacer() 
                 
                 JournalListView()
             }
