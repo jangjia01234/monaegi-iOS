@@ -41,10 +41,10 @@ struct JournalDetailView: View {
                     .padding(.bottom, 10)
                 }
                 
-                if isEditing == true {
-                    TextEditor(text: $title)
+                if isEditing {
+                    TextField("", text: $title)
                     Divider()
-                    TextEditor(text: $content)
+                    TextField("", text: $content)
                 } else {
                     Text(journal.title)
                     Divider()
