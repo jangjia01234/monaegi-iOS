@@ -55,5 +55,4 @@ struct JournalDetailView: View {
 
 #Preview {
     JournalDetailView(journal: (JournalData(title: "", content: "", date: "")))
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

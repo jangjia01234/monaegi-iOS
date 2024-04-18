@@ -43,6 +43,7 @@ struct JournalView: View {
             let journalData = JournalData(title: title, content: content, date: String(today))
             
             journalState.journals.append(journalData)
+            journalState.saveData()
             
             presentationMode.wrappedValue.dismiss()
         }
@@ -53,6 +54,5 @@ struct JournalView: View {
 
 #Preview {
     JournalView()
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         .environmentObject(JournalState())
 }

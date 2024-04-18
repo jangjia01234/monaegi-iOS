@@ -15,7 +15,6 @@
 		8DB0BFF92BC7B5B200105456 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0BFF82BC7B5B200105456 /* ContentView.swift */; };
 		8DB0BFFB2BC7B5B300105456 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */; };
 		8DB0BFFE2BC7B5B300105456 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0BFFD2BC7B5B300105456 /* Preview Assets.xcassets */; };
-		8DB0C0002BC7B5B300105456 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0BFFF2BC7B5B300105456 /* Persistence.swift */; };
 		8DB0C0032BC7B5B300105456 /* Monaegi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0C0012BC7B5B300105456 /* Monaegi.xcdatamodeld */; };
 		8DB0C00A2BC7CBD900105456 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0C0092BC7CBD900105456 /* CalendarView.swift */; };
 		8DB0C00F2BC7CC4400105456 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0C00E2BC7CC4400105456 /* Extension.swift */; };
@@ -32,7 +31,6 @@
 		8DB0BFF82BC7B5B200105456 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8DB0BFFA2BC7B5B300105456 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DB0BFFD2BC7B5B300105456 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8DB0BFFF2BC7B5B300105456 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8DB0C0022BC7B5B300105456 /* Monaegi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Monaegi.xcdatamodel; sourceTree = "<group>"; };
 		8DB0C0092BC7CBD900105456 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8DB0C00E2BC7CC4400105456 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -53,7 +51,6 @@
 		8D6F24CE2BCD4C00005C0A3E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				8DB0BFFF2BC7B5B300105456 /* Persistence.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -206,7 +203,6 @@
 			files = (
 				8DB0C00A2BC7CBD900105456 /* CalendarView.swift in Sources */,
 				8DB0C0032BC7B5B300105456 /* Monaegi.xcdatamodeld in Sources */,
-				8DB0C0002BC7B5B300105456 /* Persistence.swift in Sources */,
 				8D6F24D32BCD6279005C0A3E /* JournalDetailView.swift in Sources */,
 				8D6F24D92BCD7FA6005C0A3E /* JournalData.swift in Sources */,
 				8DB0C00F2BC7CC4400105456 /* Extension.swift in Sources */,

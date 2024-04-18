@@ -217,7 +217,6 @@ private struct CellView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .environmentObject(JournalState())
     }
 }

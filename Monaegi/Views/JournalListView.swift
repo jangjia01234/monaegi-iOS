@@ -9,6 +9,12 @@ struct JournalListView: View {
     
     let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
     
+    @State var journal: JournalData
+    
+    @State private var title: String = ""
+    @State private var content: String = ""
+    @State private var date: String = ""
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -52,6 +58,7 @@ struct JournalListView: View {
                     }
                     .onDelete(perform: { indexSet in
                         journalState.journals.remove(atOffsets: indexSet)
+                        journalState.saveData()
                     })
                 }
                 
@@ -90,11 +97,11 @@ struct JournalListView: View {
             .scrollContentBackground(.hidden)
             .background(.black)
         }
+        .onAppear(perform: journalState.loadData)
     }
 }
 
 #Preview {
-    JournalListView()
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    JournalListView(journal: (JournalData(title: "", content: "", date: "")))
         .environmentObject(JournalState())
 }
