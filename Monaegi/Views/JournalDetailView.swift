@@ -6,21 +6,8 @@ struct JournalDetailView: View {
     
     @State var journal: JournalData
     
-//    @State private var title = ""
-//    @State private var content = ""
-    
-    @State private var savedTitle: String = ""
-    
     @State private var isEditing: Bool = false
-    
     @State private var todayDate : String = String("\(Date.now)".split(separator: " ")[0])
-    
-//    init(title: String, content: String, date: String) {
-//        self.journal = JournalData(title: title, content: content, date: date)
-//        
-//        self.title = journal.title
-//        self.content = journal.content
-//    }
     
     var body: some View {
         VStack {
@@ -60,16 +47,9 @@ struct JournalDetailView: View {
             }
             Spacer()
         }
-//        .onTapGesture { hideKeyboardAndSave() }
         .animation(nil, value: editMode?.wrappedValue)
         .padding()
     }
-    
-//    private func hideKeyboardAndSave() {
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//        
-//        journalState.updateJournal(id: journal.id, after: JournalData(title: journal.title, content: journal.content, date: todayDate))
-//    }
 }
 
 
