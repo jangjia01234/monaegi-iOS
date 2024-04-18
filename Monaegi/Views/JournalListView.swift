@@ -4,16 +4,16 @@ struct JournalListView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var journalState : JournalState
     
-    @State private var isShowingAddSheet = false
-    @State private var isShowingViewSheet = false
-    
-    let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
-    
     @State var journal: JournalData
     
     @State private var title: String = ""
     @State private var content: String = ""
     @State private var date: String = ""
+    
+    @State private var isShowingAddSheet = false
+    @State private var isShowingViewSheet = false
+    
+    let todayDate : String = String("\(Date.now)".split(separator: " ")[0])
     
     var body: some View {
         NavigationStack {
@@ -39,7 +39,7 @@ struct JournalListView: View {
                                 
                             }
                         })
-                        .sheet(isPresented: $isShowingViewSheet, onDismiss: didDismiss) {
+                        .sheet(isPresented: $isShowingViewSheet) {
                             JournalDetailView(journal: journal)
                                 .environmentObject(journalState)
                                 .navigationTitle(todayDate)
@@ -74,8 +74,7 @@ struct JournalListView: View {
                         .foregroundColor(Color("AccentColor"))
                         .padding(.bottom, 20)
                 }
-                .sheet(isPresented: $isShowingAddSheet,
-                       onDismiss: didDismiss) {
+                .sheet(isPresented: $isShowingAddSheet) {
                     NavigationStack {
                         JournalView()
                             .navigationTitle(todayDate)

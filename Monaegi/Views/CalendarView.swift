@@ -22,8 +22,8 @@ struct CalendarView: View {
                     .padding(.horizontal, 20)
                 
                 calendarGridView
-                    .padding(.horizontal, 90)
                     .padding(.vertical, 20)
+                    .padding(.horizontal, 90)
             }
         }
     }
@@ -59,9 +59,7 @@ struct CalendarView: View {
             
             HStack {
                 Button(
-                    action: {
-                        changeMonth(by: -1)
-                    },
+                    action: { changeMonth(by: -1) },
                     label: {
                         Image(systemName: "chevron.left")
                             .foregroundColor(canMoveToPreviousMonth() ? .gray : .white)
@@ -70,9 +68,7 @@ struct CalendarView: View {
                 .disabled(!canMoveToPreviousMonth())
                 
                 Button(
-                    action: {
-                        changeMonth(by: 1)
-                    },
+                    action: { changeMonth(by: 1) },
                     label: {
                         Image(systemName: "chevron.right")
                             .foregroundColor(canMoveToNextMonth() ? .gray : .white)
@@ -132,47 +128,28 @@ private struct CellView: View {
     
     private var day: Int
     private var month: Int
-    
     private var clicked: Bool
     private var isToday: Bool
     private var isCurrentMonthDay: Bool
     
     private var textColor: Color {
-        if clicked {
-            return Color.black
-        } else if isToday {
-            return Color.black
-        } else if isCurrentMonthDay {
-            return Color.gray
-        } else {
-            return Color.clear
-        }
+        if isToday { return Color("darkGray") }
+        else if isCurrentMonthDay { return .gray }
+        else { return .clear }
     }
     
     private var backgroundColor: Color {
-        if clicked {
-            return Color.white
-        } else if isToday {
-            return Color.gray
-        } else {
-            return Color.black
-        }
+        return isToday ? .gray : .black
     }
     
     private var rectBgColor: Color {
-        if journalState.journals.count > 0 {
-            if Int(journalState.journals.first!.date.suffix(2)) == day &&
-                Int(journalState.journals.first!.date.split(separator: "-")[1]) == month
-            {
-                return Color("AccentColor")
-            }
-        }
-    
         if isCurrentMonthDay {
-            return Color("darkGray")
-        } else {
-            return Color.clear
-        }
+            if journalState.journals.count > 0 && 
+                (Int(journalState.journals.first!.date.suffix(2)) == day &&
+                 Int(journalState.journals.first!.date.split(separator: "-")[1]) == month) {
+                return Color("AccentColor")
+            } else { return Color("darkGray") }
+        } else { return .clear }
     }
     
     fileprivate init(

@@ -3,6 +3,7 @@ import SwiftUI
 struct JournalView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var journalState : JournalState
+    
     @State private var title: String = ""
     @State private var content: String = ""
     @State private var date: String = ""
@@ -23,7 +24,6 @@ struct JournalView: View {
                     VStack {
                         HStack {
                             Text(content.isEmpty ? "글을 작성해보세요." : "")
-                                .allowsHitTesting(false)
                                 .foregroundColor(.gray)
                                 .padding(.leading, 5)
                                 .padding(.top, 6)
@@ -44,7 +44,6 @@ struct JournalView: View {
             
             journalState.journals.append(journalData)
             journalState.saveData()
-            
             presentationMode.wrappedValue.dismiss()
         }
             .disabled(title.isEmpty || content.isEmpty)

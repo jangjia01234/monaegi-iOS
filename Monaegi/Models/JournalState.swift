@@ -13,14 +13,7 @@ class JournalState: ObservableObject {
         
         if let data = try? JSONEncoder().encode(journals) {
             try? data.write(to: fileURL)
-            print("data saved.. maybe?")
-            
-        } else {
-            print("Can't save data")
-        }
-        
-        print("saveData()")
-        
+        } else { print("Can't save data") }
     }
 
     func loadData() {
@@ -28,14 +21,8 @@ class JournalState: ObservableObject {
         if let data = try? Data(contentsOf: fileURL) {
             if let decoded = try? JSONDecoder().decode([JournalData].self, from: data) {
                 self.journals = decoded
-                
-                print("load succedd!")
             }
-        } else {
-            print("Can't load data")
-        }
-        
-        print("loadData()")
+        } else { print("Can't load data") }
     }
 
     func getDocumentsDirectory() -> URL {

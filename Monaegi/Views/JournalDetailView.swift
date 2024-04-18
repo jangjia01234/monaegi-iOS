@@ -22,19 +22,15 @@ struct JournalDetailView: View {
                     Button(action: {
                         if isEditing {
                             journalState.updateJournal(id: journal.id, after: JournalData(title: journal.title, content: journal.content, date: todayDate))
-                        } else {
-                            print("button is working in non-editing environment")
-                        }
+                        } else { print("button is in non-editing mode") }
                         
                         isEditing.toggle()
-                        
                     }, label: {
                         Text(isEditing ? "완료" : "수정")
                             .fontWeight(.semibold)
                     })
                     .padding(.bottom, 10)
                 }
-                
                 if isEditing {
                     TextField("", text: $journal.title)
                     Divider()

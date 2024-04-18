@@ -10,7 +10,7 @@ struct ContentView: View {
             VStack {
                 CalendarView()
                 
-                Spacer() 
+                Spacer()
                 
                 JournalListView(journal: (JournalData(title: "", content: "", date: "")))
                     .environmentObject(journalState)
@@ -18,10 +18,6 @@ struct ContentView: View {
         }
         .background(.black)
     }
-}
-
-func didDismiss() {
-    // MARK: dissmiss 액션 코드
 }
 
 
