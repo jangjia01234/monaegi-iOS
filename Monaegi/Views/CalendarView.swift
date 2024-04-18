@@ -28,7 +28,6 @@ struct CalendarView: View {
         }
     }
     
-    // 🎨 헤더 뷰
     private var headerView: some View {
         VStack {
             yearMonthView
@@ -50,7 +49,6 @@ struct CalendarView: View {
         .padding(.horizontal, 20)
     }
     
-    // 🎨 연월 표시
     private var yearMonthView: some View {
         HStack(alignment: .center) {
             Text(month, formatter: Self.calendarHeaderDateFormatter)
@@ -89,7 +87,6 @@ struct CalendarView: View {
         .padding(.bottom, 15)
     }
     
-    // 🎨 날짜 그리드 뷰
     private var calendarGridView: some View {
         let daysInMonth: Int = numberOfDays(in: month)
         let firstWeekday: Int = firstWeekdayOfMonth(in: month) - 1
@@ -130,7 +127,6 @@ struct CalendarView: View {
     }
 }
 
-// 🎨 일자 셀 뷰
 private struct CellView: View {
     @EnvironmentObject var journalState : JournalState
     
@@ -200,15 +196,6 @@ private struct CellView: View {
                 .frame(width: 25, height: 25)
                 .foregroundColor(rectBgColor)
                 .padding(.bottom, -5)
-            
-//            Circle()
-//                .fill(backgroundColor)
-//                .overlay(
-//                    Text(String(day))
-//                        .font(.system(size: 10))
-//                        .foregroundColor(textColor)
-//                )
-//                .frame(width: 20, height: 20)
         }
         .frame(height: 20)
     }

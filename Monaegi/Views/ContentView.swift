@@ -29,3 +29,4 @@ func didDismiss() {
     ContentView()
         .environmentObject(JournalState())
 }
+
