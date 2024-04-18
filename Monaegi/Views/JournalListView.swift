@@ -34,7 +34,6 @@ struct JournalListView: View {
                             }
                         })
                         .sheet(isPresented: $isShowingViewSheet, onDismiss: didDismiss) {
-                        
                             JournalDetailView(journal: journal)
                                 .environmentObject(journalState)
                                 .navigationTitle(todayDate)
@@ -49,7 +48,6 @@ struct JournalListView: View {
                                         }
                                     }
                                 }
-                            
                         }
                     }
                     .onDelete(perform: { indexSet in
