@@ -3,15 +3,24 @@ import SwiftUI
 struct JournalDetailView: View {
     @Environment(\.editMode) private var editMode
     @EnvironmentObject var journalState : JournalState
-
-    var journal: JournalData
     
-    @State private var title = ""
-    @State private var content = ""
+    @State var journal: JournalData
+    
+//    @State private var title = ""
+//    @State private var content = ""
     
     @State private var savedTitle: String = ""
     
     @State private var isEditing: Bool = false
+    
+    @State private var todayDate : String = String("\(Date.now)".split(separator: " ")[0])
+    
+//    init(title: String, content: String, date: String) {
+//        self.journal = JournalData(title: title, content: content, date: date)
+//        
+//        self.title = journal.title
+//        self.content = journal.content
+//    }
     
     var body: some View {
         VStack {
@@ -20,14 +29,12 @@ struct JournalDetailView: View {
                     .foregroundColor(.gray)
                     .padding(.bottom, 10)
                 
-                
                 HStack {
                     Spacer()
                     
                     Button(action: {
                         if isEditing {
-                            journalState.updateJournal(id: journal.id, after: JournalData(title: title, content: content, date: ""))
-                            
+                            journalState.updateJournal(id: journal.id, after: JournalData(title: journal.title, content: journal.content, date: todayDate))
                         } else {
                             print("button is working in non-editing environment")
                         }
@@ -42,9 +49,9 @@ struct JournalDetailView: View {
                 }
                 
                 if isEditing {
-                    TextField("", text: $title)
+                    TextField("", text: $journal.title)
                     Divider()
-                    TextField("", text: $content)
+                    TextField("", text: $journal.content)
                 } else {
                     Text(journal.title)
                     Divider()
@@ -53,27 +60,16 @@ struct JournalDetailView: View {
             }
             Spacer()
         }
-        .onTapGesture { hideKeyboardAndSave() }
+//        .onTapGesture { hideKeyboardAndSave() }
         .animation(nil, value: editMode?.wrappedValue)
         .padding()
     }
     
-    private func hideKeyboardAndSave() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        save()
-    }
-    
-    private func save() {
-        
-        
-        
-//        self.journalState.addData()
-//        let today = "\(Date.now)".split(separator: " ")[0]
+//    private func hideKeyboardAndSave() {
+//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 //        
-//        let journalData = JournalData(title: title, content: content, date: String(today))
-//        
-//        journalState.journals.append(journalData)
-    }
+//        journalState.updateJournal(id: journal.id, after: JournalData(title: journal.title, content: journal.content, date: todayDate))
+//    }
 }
 
 
