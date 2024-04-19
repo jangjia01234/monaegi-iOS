@@ -18,48 +18,59 @@ struct JournalListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List {
-                    ForEach(Array(journalState.journals.enumerated()), id: \.1) { idx, journal in
-                        Button(action: {
-                            isShowingViewSheet = true
-                        }, label: {
-                            VStack(alignment: .leading) {
-                                Text(journal.date)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                    .padding(.bottom, 4)
-                                
-                                Text(journal.title)
-                                    .font(.headline)
-                                
-                                Text(journal.content)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                
-                                
-                            }
-                        })
-                        .sheet(isPresented: $isShowingViewSheet) {
-                            JournalDetailView(journal: journal)
-                                .environmentObject(journalState)
-                                .navigationTitle(todayDate)
-                                .navigationBarTitleDisplayMode(.inline)
-                                .toolbar {
-                                    ToolbarItem(placement: .topBarLeading) {
-                                        Button {
-                                            isShowingViewSheet.toggle()
-                                        } label: {
-                                            Text("취소")
-                                                .fontWeight(.semibold)
-                                        }
+//                Button {
+//                    print("journalState.selectedDate", journalState.selectedDate)
+//                    print("journalState.journals.first!.date", journalState.journals.first!.date)
+//                } label: {
+//                    Text("Test")
+//                }
+                
+                if journalState.isShowingList {
+                    List {
+                        ForEach(Array(journalState.journals.enumerated()), id: \.1) { idx, journal in
+                            if String(journalState.selectedDate) == String(journalState.journals[idx].date) {
+                                Button(action: {
+                                    isShowingViewSheet = true
+                                    print("journalState.journals[idx]", journalState.journals[idx])
+                                }, label: {
+                                    VStack(alignment: .leading) {
+                                        Text(journal.date)
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                            .padding(.bottom, 4)
+                                        
+                                        Text(journal.title)
+                                            .font(.headline)
+                                        
+                                        Text(journal.content)
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
                                     }
+                                })
+                                .sheet(isPresented: $isShowingViewSheet) {
+                                    JournalDetailView(journal: journal)
+                                        .environmentObject(journalState)
+                                        .navigationTitle(todayDate)
+                                        .navigationBarTitleDisplayMode(.inline)
+                                        .toolbar {
+                                            ToolbarItem(placement: .topBarLeading) {
+                                                Button {
+                                                    isShowingViewSheet.toggle()
+                                                } label: {
+                                                    Text("취소")
+                                                        .fontWeight(.semibold)
+                                                }
+                                            }
+                                        }
                                 }
+                            }
                         }
+                        .onDelete(perform: { indexSet in
+                            journalState.journals.remove(atOffsets: indexSet)
+                            journalState.saveData()
+                        })
+                        .listRowBackground(Color("darkGray"))
                     }
-                    .onDelete(perform: { indexSet in
-                        journalState.journals.remove(atOffsets: indexSet)
-                        journalState.saveData()
-                    })
                 }
                 
                 Spacer()
@@ -77,7 +88,9 @@ struct JournalListView: View {
                 .sheet(isPresented: $isShowingAddSheet) {
                     NavigationStack {
                         JournalView()
-                            .navigationTitle(todayDate)
+                            .navigationTitle(
+                                journalState.selectedDate
+                            )
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar(content: {
                                 ToolbarItemGroup(placement: .topBarLeading) {

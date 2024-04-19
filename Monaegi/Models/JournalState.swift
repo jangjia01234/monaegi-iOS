@@ -2,6 +2,8 @@ import Foundation
 
 class JournalState: ObservableObject {
     @Published var journals: [JournalData] = []
+    @Published var isShowingList: Bool = false
+    @Published var selectedDate: String = ""
     
     func updateJournal(id: UUID, after: JournalData) {
         guard let index = journals.firstIndex(where: { $0.id == id }) else { return }

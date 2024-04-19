@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @EnvironmentObject var journalState : JournalState
+    
     @State var month: Date = Date()
     @State var clickedCurrentMonthDates: Date?
     
@@ -16,23 +18,17 @@ struct CalendarView: View {
         VStack {
             headerView
             
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color("darkGray"))
-                    .padding(.horizontal, 20)
-                
-                calendarGridView
-                    .padding(.vertical, 20)
-                    .padding(.horizontal, 90)
-            }
+            calendarGridView
+                .padding(.vertical, 20)
+                .padding(.horizontal, 40)
         }
     }
     
     private var headerView: some View {
         VStack {
             yearMonthView
-                .padding(.top, 80)
-                .padding(.bottom, 20)
+                .padding(.top, 60)
+                .padding(.bottom, 15)
             
             HStack {
                 ForEach(Self.weekdaySymbols.indices, id: \.self) { symbol in
@@ -43,7 +39,6 @@ struct CalendarView: View {
                         .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.bottom, 5)
             .padding(.horizontal, 10)
         }
         .padding(.horizontal, 20)
@@ -80,7 +75,7 @@ struct CalendarView: View {
             .font(.system(size: 18))
             .fontWeight(.semibold)
         }
-        .padding(.bottom, 15)
+        .padding(.horizontal, 10)
     }
     
     private var calendarGridView: some View {
@@ -94,22 +89,24 @@ struct CalendarView: View {
             ForEach(-firstWeekday ..< daysInMonth + visibleDaysOfNextMonth, id: \.self) { index in
                 Group {
                     if index > -1 && index < daysInMonth {
-                        let date = getDate(for: index)
-                        let day = Calendar.current.component(.day, from: date)
-                        let month = Calendar.current.component(.month, from: date)
-                        let clicked = clickedCurrentMonthDates == date
-                        let isToday = date.formattedCalendarDayDate == today.formattedCalendarDayDate
+                        let calDate = getDate(for: index)
+                        let year = Calendar.current.component(.year, from: calDate)
+                        let month = Calendar.current.component(.month, from: calDate)
+                        let day = Calendar.current.component(.day, from: calDate)
+                        let clicked = clickedCurrentMonthDates == calDate
+                        let isToday = calDate.formattedCalendarDayDate == today.formattedCalendarDayDate
                         
-                        CellView(day: day, month: month, clicked: clicked, isToday: isToday)
+                        CellView(year: year, month: month, day: day, clicked: clicked, isToday: isToday, journal: (JournalData(title: "", content: "", date: "")))
                     } else if let prevMonthDate = Calendar.current.date(
                         byAdding: .day,
                         value: index + lastDayOfMonthBefore,
                         to: previousMonth()
                     ) {
-                        let day = Calendar.current.component(.day, from: prevMonthDate)
+                        let year = Calendar.current.component(.year, from: prevMonthDate)
                         let month = Calendar.current.component(.month, from: prevMonthDate)
+                        let day = Calendar.current.component(.day, from: prevMonthDate)
                         
-                        CellView(day: day, month: month, isCurrentMonthDay: false)
+                        CellView(year: year, month: month, day: day, isCurrentMonthDay: false, journal: (JournalData(title: "", content: "", date: "")))
                     }
                 }
                 .onTapGesture {
@@ -126,8 +123,11 @@ struct CalendarView: View {
 private struct CellView: View {
     @EnvironmentObject var journalState : JournalState
     
-    private var day: Int
+    @State var journal: JournalData
+    
+    private var year: Int
     private var month: Int
+    private var day: Int
     private var clicked: Bool
     private var isToday: Bool
     private var isCurrentMonthDay: Bool
@@ -144,37 +144,67 @@ private struct CellView: View {
     
     private var rectBgColor: Color {
         if isCurrentMonthDay {
-            if journalState.journals.count > 0 && 
-                (Int(journalState.journals.first!.date.suffix(2)) == day &&
-                 Int(journalState.journals.first!.date.split(separator: "-")[1]) == month) {
-                return Color("AccentColor")
-            } else { return Color("darkGray") }
+            if !journalState.journals.isEmpty &&
+                (day == Int(journal.date.suffix(2)) &&
+                 month == Int(journal.date.split(separator: "-")[1])) {
+                return .clear
+            }
+            return Color("brown")
         } else { return .clear }
     }
     
     fileprivate init(
-        day: Int,
+        year: Int,
         month: Int,
+        day: Int,
         clicked: Bool = false,
         isToday: Bool = false,
-        isCurrentMonthDay: Bool = true
+        isCurrentMonthDay: Bool = true,
+        journal: JournalData = JournalData(title: "", content: "", date: "")
     ) {
-        self.day = day
+        self.year = year
         self.month = month
+        self.day = day
         self.clicked = clicked
         self.isToday = isToday
         self.isCurrentMonthDay = isCurrentMonthDay
+        self.journal = journal
     }
     
     fileprivate var body: some View {
         VStack {
             Rectangle()
-                .cornerRadius(5)
-                .frame(width: 25, height: 25)
+                .cornerRadius(8)
+                .frame(width: 35, height: 35)
                 .foregroundColor(rectBgColor)
-                .padding(.bottom, -5)
+                .overlay {
+                    if journalState.journals.count > 0 &&
+                        (day == Int(journalState.journals[0].date.suffix(2)) &&
+                        month == Int(journalState.journals[0].date.split(separator: "-")[1])) {
+                        Image("grassIcon")
+                            .resizable()
+                            .frame(width: 40, height: 38)
+                    }
+                }
+                .onTapGesture {
+                    if day == Int(journalState.journals[0].date.suffix(2)) {
+                        journalState.isShowingList = true
+                    } else {
+                        journalState.isShowingList = false
+                    }
+                    
+                    if String(month).count == 1 && String(day).count == 1 {
+                        journalState.selectedDate = "\(year)-0\(month)-0\(day)"
+                    } else if String(month).count == 1 && String(day).count > 1 {
+                        journalState.selectedDate = "\(year)-0\(month)-\(day)"
+                    } else if String(month).count > 1 && String(day).count == 1 {
+                        journalState.selectedDate = "\(year)-\(month)-0\(day)"
+                    } else {
+                        journalState.selectedDate = "\(year)-\(month)-\(day)"
+                    }
+                }
         }
-        .frame(height: 20)
+        .frame(height: 40)
     }
 }
 

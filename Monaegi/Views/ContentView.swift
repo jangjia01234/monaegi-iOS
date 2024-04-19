@@ -3,7 +3,6 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var journalState : JournalState
-    @State private var isShowingSheet = false
     
     var body: some View {
         ZStack {

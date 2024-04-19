@@ -38,9 +38,9 @@ struct JournalView: View {
         .padding()
         .navigationBarItems(trailing:
                                 Button("완료") {
-            let today = "\(Date.now)".split(separator: " ")[0]
+//            let today = "\(Date.now)".split(separator: " ")[0]
             
-            let journalData = JournalData(title: title, content: content, date: String(today))
+            let journalData = JournalData(title: title, content: content, date: journalState.selectedDate)
             
             journalState.journals.append(journalData)
             journalState.saveData()
