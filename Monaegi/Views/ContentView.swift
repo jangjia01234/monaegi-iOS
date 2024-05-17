@@ -18,6 +18,7 @@ struct ContentView: View {
         .background(.black)
         
         // git 연습중입니다.
+        // snooq 브랜치입니다.
     }
 }
 
