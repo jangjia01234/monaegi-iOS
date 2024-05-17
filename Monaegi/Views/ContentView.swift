@@ -16,6 +16,8 @@ struct ContentView: View {
             }
         }
         .background(.black)
+        
+        // git 연습중입니다.
     }
 }
 
